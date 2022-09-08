@@ -6,7 +6,7 @@ const inventoryController = require("../controllers/inventoryControllers");
 
 router.route("/list").get(inventoryController.inventoryList);
 
-//------------ Inventory detail endpoint --------
-router.route("/:id");
+//------------ Inventory details endpoint --------
+router.route("/:id").get(inventoryController.inventoryItem);
 
 module.exports = router;
