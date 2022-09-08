@@ -24,6 +24,16 @@ const inventoryItem = (req, res) => {
 	});
 };
 
+// ---------- Get all inventory items for a Warehouse --------
+const inventoryWarehouse = (req, res) => {
+	const id = req.params.id;
+	const inventoryWarehouse = inventoryData.filter((list) => list.warehouseID === id);
+	res.status(200).json({
+		status: "success",
+		inventoryWarehouse
+	});
+};
+
 //------- Delete Item ----------
 const deleteInvetoryItem = (req, res) => {
   let inventory = inventoryModel.fetchInventoryData();
@@ -37,4 +47,5 @@ module.exports = {
   inventoryList,
   deleteInvetoryItem,
   inventoryItem,
+  inventoryWarehouse,
 };

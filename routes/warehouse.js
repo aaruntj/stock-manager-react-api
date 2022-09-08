@@ -10,4 +10,6 @@ const warehouseController = require("../controllers/warehouseControllers");
 //Warehouse detail endpoint
 // router.route("/:id");
 
+
+
 module.exports = router;
