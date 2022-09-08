@@ -8,8 +8,7 @@ const warehouseController = require("../controllers/warehouseControllers");
 // router.route("/").get(warehouseController.warehouseList);
 
 //Warehouse detail endpoint
-// router.route("/:id");
-
+router.route("/:id/inventory").get(warehouseController.warehouseInventory);
 
 
 module.exports = router;

@@ -7,29 +7,4 @@ const { v4: uuidv4 } = require("uuid");
 //   return inventory;
 // };
 
-//--------- Inventory Data ----------
-let inventoryData = inventoryModel.fetchInventoryData();
-
-//------- Get all Inventory List ----------
-const inventoryList = (_req, res) => {
-	res.status(200).json({
-		status: "success",
-		inventoryData,
-	});
-};
-
-
-// ---------- Get all inventory items for a Warehouse --------
-const inventoryWarehouse = (req, res) => {
-	const id = req.params.id;
-	const inventoryWarehouse = inventoryData.filter((list) => list.warehouseID === id);
-	res.status(200).json({
-		status: "success",
-		inventoryWarehouse
-	});
-};
-
-module.exports = {
-	inventoryList,
-  inventoryWarehouse
-};
+module.exports = {};
