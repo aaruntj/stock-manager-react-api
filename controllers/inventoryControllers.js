@@ -24,7 +24,17 @@ const inventoryItem = (req, res) => {
 	});
 };
 
+//------- Delete Item ----------
+const deleteInvetoryItem = (req, res) => {
+  let inventory = inventoryModel.fetchInventoryData();
+  const currentItem = inventory.find((item) => item.id === req.params.id);
+  inventory.splice(inventory.indexOf(currentItem), 1);
+  inventoryModel.writeInventoryData(inventory);
+  res.status(200).json(currentItem);
+};
+
 module.exports = {
-	inventoryList,
-	inventoryItem,
+  inventoryList,
+  deleteInvetoryItem,
+  inventoryItem,
 };
