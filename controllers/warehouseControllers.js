@@ -13,26 +13,29 @@ let warehouseData = warehouseModel.fetchWarehouseData();
 
 //------- Get all Warehouses List ----------
 const warehouseList = (_req, res) => {
-	res
-		.status(200)
-		.json({
-			status: "success",
-			results: warehouseData.length,
-			warehouseData
-		});
+  res.status(200).json({
+    status: "success",
+    results: warehouseData.length,
+    warehouseData,
+  });
 };
 
 // ---------- Get all inventory items for a Warehouse --------
 const warehouseInventory = (req, res) => {
-	const id = req.params.id;
-	const warehouseInventory = inventoryData.filter((list) => list.warehouseID === id);
-	res.status(200).json({
-		status: "success",
-		warehouseInventory
-	});
+  const id = req.params.id;
+  const warehouseInventory = inventoryData.filter(
+    (list) => list.warehouseID === id
+  );
+  res.status(200).json({
+    status: "success",
+    warehouseInventory,
+  });
 };
 
+const deleteWarehouse = (req, res) => {};
+
 module.exports = {
-	warehouseList,
-  warehouseInventory
+  warehouseList,
+  warehouseInventory,
+  deleteWarehouse,
 };
