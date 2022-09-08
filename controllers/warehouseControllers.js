@@ -8,17 +8,19 @@ const { v4: uuidv4 } = require("uuid");
 //   return warehouse;
 // };
 
-//--------- Inventory Data ----------
-let inventoryData = inventoryModel.fetchInventoryData();
+//--------- Warehouse Data ----------
+let warehouseData = warehouseModel.fetchWarehouseData();
 
-//------- Get all Inventory List ----------
-const inventoryList = (_req, res) => {
-	res.status(200).json({
-		status: "success",
-		inventoryData,
-	});
+//------- Get all Warehouses List ----------
+const warehouseList = (_req, res) => {
+	res
+		.status(200)
+		.json({
+			status: "success",
+			results: warehouseData.length,
+			warehouseData
+		});
 };
-
 
 // ---------- Get all inventory items for a Warehouse --------
 const warehouseInventory = (req, res) => {
@@ -31,6 +33,6 @@ const warehouseInventory = (req, res) => {
 };
 
 module.exports = {
-	inventoryList,
+	warehouseList,
   warehouseInventory
 };
