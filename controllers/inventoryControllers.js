@@ -1,14 +1,27 @@
 const inventoryModel = require("../models/inventoryModel");
 const { v4: uuidv4 } = require("uuid");
 
+//--------- Inventory Data ----------
+let inventoryData = inventoryModel.fetchInventoryData();
+
 //------- Get all Inventory List ----------
-const inventoryList = (req, res) => {
-  let inventory = inventoryModel.fetchInventoryData();
-  res.status(200).json({
-    status: "sucess",
-    results: inventory.length,
-    inventory,
-  });
+const inventoryList = (_req, res) => {
+	res.status(200).json({
+		status: "sucess",
+		results: inventoryData.length,
+		inventoryData,
+	});
+};
+
+// ---------- Get single Inventory Item --------
+const inventoryItem = (req, res) => {
+	const id = req.params.id;
+	const inventoryItem = inventoryData.find((item) => item.id === id);
+
+	res.status(200).json({
+		status: "sucess",
+		inventoryItem,
+	});
 };
 
 //------- Delete Item ----------
@@ -23,4 +36,5 @@ const deleteInvetoryItem = (req, res) => {
 module.exports = {
   inventoryList,
   deleteInvetoryItem,
+  inventoryItem,
 };
