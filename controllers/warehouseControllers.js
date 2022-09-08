@@ -2,12 +2,6 @@ const warehouseModel = require("../models/warehouseModel");
 const inventoryModel = require("../models/inventoryModel");
 const { v4: uuidv4 } = require("uuid");
 
-//example return list from warehouse file
-// const warehouseList = (req, res) => {
-//   let warehouse = warehouseModel.fetchWarehouseData();
-//   return warehouse;
-// };
-
 //--------- Warehouse Data ----------
 let warehouseData = warehouseModel.fetchWarehouseData();
 
@@ -32,6 +26,7 @@ const warehouseInventory = (req, res) => {
   });
 };
 
+// ---------- Delete Warehouse and ascociated inventory --------
 const deleteWarehouse = (req, res) => {
   let warehouses = warehouseModel.fetchWarehouseData();
   let currentwarehouse = warehouses.find(
@@ -42,7 +37,7 @@ const deleteWarehouse = (req, res) => {
   let inventory = inventoryModel.fetchInventoryData();
   inventory = inventory.filter((item) => item.warehouseID !== req.params.id);
   inventoryModel.writeInventoryData(inventory);
-  res.status(200).json(inventory);
+  res.status(200).json(currentwarehouse);
 };
 
 module.exports = {
