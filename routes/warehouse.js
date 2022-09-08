@@ -5,7 +5,7 @@ const warehouseController = require("../controllers/warehouseControllers");
 //Warehouse list endpoint
 
 //example return warehouselist
-// router.route("/").get(warehouseController.warehouseList);
+router.route("/").get(warehouseController.warehouseList);
 
 //Warehouse detail endpoint
 router.route("/:id/inventory").get(warehouseController.warehouseInventory);
