@@ -20,3 +20,8 @@ app.listen(8080, () => {
   console.log("Running on: " + PORT);
   console.log("URL: " + BACKEND_URL);
 });
+
+app.get("/", (req, res) => {
+  console.log("Recieved");
+  res.send("response is here!!");
+})
