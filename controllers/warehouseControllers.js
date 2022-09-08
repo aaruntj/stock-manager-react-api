@@ -22,7 +22,6 @@ const warehouseList = (_req, res) => {
 		});
 };
 
-
 // ---------- Get all inventory items for a Warehouse --------
 const warehouseInventory = (req, res) => {
 	const id = req.params.id;
