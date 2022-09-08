@@ -32,7 +32,18 @@ const warehouseInventory = (req, res) => {
   });
 };
 
-const deleteWarehouse = (req, res) => {};
+const deleteWarehouse = (req, res) => {
+  let warehouses = warehouseModel.fetchWarehouseData();
+  let currentwarehouse = warehouses.find(
+    (warehouse) => warehouse.id === req.params.id
+  );
+  warehouses.splice(warehouses.indexOf(currentwarehouse), 1);
+  warehouseModel.writeWarehouseData(warehouses);
+  let inventory = inventoryModel.fetchInventoryData();
+  inventory = inventory.filter((item) => item.warehouseID !== req.params.id);
+  inventoryModel.writeInventoryData(inventory);
+  res.status(200).json(inventory);
+};
 
 module.exports = {
   warehouseList,
