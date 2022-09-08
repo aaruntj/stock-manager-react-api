@@ -6,24 +6,23 @@ let inventoryData = inventoryModel.fetchInventoryData();
 
 //------- Get all Inventory List ----------
 const inventoryList = (_req, res) => {
-	res.status(200).json({
-		status: "sucess",
-		results: inventoryData.length,
-		inventoryData,
-	});
+  res.status(200).json({
+    status: "sucess",
+    results: inventoryData.length,
+    inventoryData,
+  });
 };
 
 // ---------- Get single Inventory Item --------
 const inventoryItem = (req, res) => {
-	const id = req.params.id;
-	const inventoryItem = inventoryData.find((item) => item.id === id);
+  const id = req.params.id;
+  const inventoryItem = inventoryData.find((item) => item.id === id);
 
-	res.status(200).json({
-		status: "sucess",
-		inventoryItem,
-	});
+  res.status(200).json({
+    status: "sucess",
+    inventoryItem,
+  });
 };
-
 
 //------- Delete Item ----------
 const deleteInvetoryItem = (req, res) => {
