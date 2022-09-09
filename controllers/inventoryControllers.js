@@ -53,9 +53,30 @@ const addInventoryItem = (req, res) => {
   res.sendStatus(200)
 };
 
+const updateInventoryItem = (req, res) => {
+  objIndex = inventoryData.findIndex(inventoryItem => inventoryItem.id === req.body.id)
+  // console.log(objIndex)
+  let oldInventoryData = inventoryData;
+  oldInventoryData[objIndex].warehouseID = req.body.warehouseID
+  oldInventoryData[objIndex].warehouseName = req.body.warehouseName
+  oldInventoryData[objIndex].itemName = req.body.itemName
+  oldInventoryData[objIndex].description = req.body.description
+  oldInventoryData[objIndex].category = req.body.category
+  oldInventoryData[objIndex].status = req.body.status
+  oldInventoryData[objIndex].quantity = req.body.quantity
+  inventoryModel.writeInventoryData(oldInventoryData)
+  console.log(oldInventoryData)
+  //find the objects index
+  res.sendStatus(200)
+
+    //update the properties
+}
+
+
 module.exports = {
   inventoryList,
   deleteInvetoryItem,
   inventoryItem,
-  addInventoryItem
+  addInventoryItem,
+  updateInventoryItem
 };

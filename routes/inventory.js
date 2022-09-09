@@ -6,7 +6,8 @@ const inventoryController = require("../controllers/inventoryControllers");
 router
   .route("/")
   .get(inventoryController.inventoryList)
-  .post(inventoryController.addInventoryItem);
+  .post(inventoryController.addInventoryItem)
+  .put(inventoryController.updateInventoryItem);
   
 
 //Inventory detail endpoint
