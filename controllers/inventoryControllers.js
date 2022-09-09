@@ -34,6 +34,7 @@ const deleteInvetoryItem = (req, res) => {
   res.status(200).json(currentItem);
 };
 
+//------- Add Item ----------
 const addInventoryItem = (req, res) => {
   let inventory = inventoryModel.fetchInventoryData();
   let listOfWarehouses = warehouseModel.fetchWarehouseData();
@@ -53,9 +54,29 @@ const addInventoryItem = (req, res) => {
   res.sendStatus(200)
 };
 
+//------- Update Item ----------
+const updateInventoryItem = (req, res) => {
+  objIndex = inventoryData.findIndex(inventoryItem => inventoryItem.id === req.body.id)
+  let oldInventoryData = inventoryData;
+
+  oldInventoryData[objIndex].warehouseID = req.body.warehouseID
+  oldInventoryData[objIndex].warehouseName = req.body.warehouseName
+  oldInventoryData[objIndex].itemName = req.body.itemName
+  oldInventoryData[objIndex].description = req.body.description
+  oldInventoryData[objIndex].category = req.body.category
+  oldInventoryData[objIndex].status = req.body.status
+  oldInventoryData[objIndex].quantity = req.body.quantity
+
+  inventoryModel.writeInventoryData(oldInventoryData)
+  res.sendStatus(200)
+
+}
+
+
 module.exports = {
   inventoryList,
   deleteInvetoryItem,
   inventoryItem,
-  addInventoryItem
+  addInventoryItem,
+  updateInventoryItem
 };
