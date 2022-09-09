@@ -3,7 +3,11 @@ const router = express.Router();
 const inventoryController = require("../controllers/inventoryControllers");
 
 //Inventory list endpoint
-router.route("/").get(inventoryController.inventoryList);
+router
+  .route("/")
+  .get(inventoryController.inventoryList)
+  .post(inventoryController.addInventoryItem);
+  
 
 //Inventory detail endpoint
 router
