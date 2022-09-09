@@ -1,5 +1,4 @@
 const warehouseModel = require("../models/warehouseModel");
-const inventoryModel = require("../models/inventoryModel");
 const { v4: uuidv4 } = require("uuid");
 
 //--------- Warehouse Data ----------
@@ -11,6 +10,17 @@ const warehouseList = (_req, res) => {
     status: "success",
     results: warehouseData.length,
     warehouseData,
+  });
+};
+
+//------- Get a single warehouse ----------
+const warehouseSingle = (req, res) => {
+  const id = req.params.id;
+  const warehouseSingle = warehouseData.find((i) => i.id === id);
+
+  res.status(200).json({
+    status: "sucess",
+    warehouseSingle,
   });
 };
 
@@ -42,6 +52,7 @@ const deleteWarehouse = (req, res) => {
 
 module.exports = {
   warehouseList,
+  warehouseSingle,
   warehouseInventory,
   deleteWarehouse,
 };
