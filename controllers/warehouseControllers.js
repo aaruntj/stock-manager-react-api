@@ -14,6 +14,17 @@ const warehouseList = (_req, res) => {
   });
 };
 
+//------- Get a single warehouse ----------
+const warehouseSingle = (req, res) => {
+  const id = req.params.id;
+  const warehouseSingle = warehouseData.find((i) => i.id === id);
+
+  res.status(200).json({
+    status: "sucess",
+    warehouseSingle,
+  });
+};
+
 // ---------- Get all inventory items for a Warehouse --------
 const warehouseInventory = (req, res) => {
   const id = req.params.id;
@@ -42,6 +53,7 @@ const deleteWarehouse = (req, res) => {
 
 module.exports = {
   warehouseList,
+  warehouseSingle,
   warehouseInventory,
   deleteWarehouse,
 };
