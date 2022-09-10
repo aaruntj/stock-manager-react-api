@@ -1,4 +1,5 @@
 const warehouseModel = require("../models/warehouseModel");
+const inventoryModel = require("../models/inventoryModel");
 const { v4: uuidv4 } = require("uuid");
 
 //--------- Warehouse Data ----------
