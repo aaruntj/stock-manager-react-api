@@ -1,6 +1,6 @@
 const inventoryModel = require("../models/inventoryModel");
 const warehouseModel = require("../models/warehouseModel");
-const { v4: uuidv4 } = require("uuid");
+const { v4: uuidv4 } = require('uuid');
 
 //--------- Inventory Data ----------
 let inventoryData = inventoryModel.fetchInventoryData();
@@ -71,14 +71,19 @@ const updateInventoryItem = (req, res) => {
 	oldInventoryData[objIndex].status = req.body.status;
 	oldInventoryData[objIndex].quantity = req.body.quantity;
 
-	inventoryModel.writeInventoryData(oldInventoryData);
-	res.sendStatus(200);
-};
+
+  inventoryModel.writeInventoryData(oldInventoryData)
+  res.sendStatus(200)
+
+}
+
+
 
 module.exports = {
-	inventoryList,
-	deleteInvetoryItem,
-	inventoryItem,
-	addInventoryItem,
-	updateInventoryItem,
+
+  inventoryList,
+  deleteInvetoryItem,
+  inventoryItem,
+  addInventoryItem,
+  updateInventoryItem
 };
