@@ -5,8 +5,9 @@ const { v4: uuidv4 } = require("uuid");
 //--------- Warehouse Data ----------
 let warehouseData = warehouseModel.fetchWarehouseData();
 
-//--------- Warehouse Data ----------
+//--------- Inventory Data ----------
 let inventoryData = inventoryModel.fetchInventoryData();
+
 //------- Get all Warehouses List ----------
 const warehouseList = (_req, res) => {
 	res.status(200).json({
@@ -49,6 +50,46 @@ const singleWarehouse = (req, res) => {
 		warehouse,
 	});
 };
+
+// -------Add a new Warehouse--------
+const addWarehouse = (req,res) =>{
+  if(
+    !req.body.name ||
+    !req.body.address ||
+    !req.body.city ||
+    !req.body.country ||
+    !req.body.contactName ||
+    !req.body.contactPosition ||
+    !req.body.contactPhone ||
+    !req.body.contactEmail
+  ){
+    return res
+      .status(400)
+      .json({error: "missing field"})
+  }
+
+  const newWarehouse = {
+    "id": uuidv4(),
+		"name": req.body.name,
+		"address": req.body.address,
+		"city": req.body.city,
+		"country": req.body.country,
+		"contact": {
+			"name": req.body.contactName,
+			"position": req.body.contactPosition,
+			"phone": req.body.contactPhone,
+			"email": req.body.contactEmail
+		}
+  }
+
+  let warehouseData = warehouseModel.fetchWarehouseData()
+  warehouseData.push(newWarehouse)
+  warehouseModel.writeWarehouseData(warehouseData)
+  res
+    .status(200)
+    .json("new warehouse added")
+}
+
 // ---------- Delete Warehouse and ascociated inventory --------
 const deleteWarehouse = (req, res) => {
 	let warehouses = warehouseModel.fetchWarehouseData();
@@ -64,7 +105,6 @@ const deleteWarehouse = (req, res) => {
 };
 
 //------ Check empty fields Function  ------
-
 const checkFields = (req, res, next) => {
 	if (
 		!req.body.name ||
@@ -125,6 +165,7 @@ const editWareHouse = (req, res) => {
 module.exports = {
 	warehouseList,
 	warehouseInventory,
+  addWarehouse,
 	deleteWarehouse,
 	checkFields,
 	fieldValidation,
