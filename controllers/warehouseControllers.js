@@ -36,7 +36,6 @@ const warehouseInventory = (req, res) => {
 	const warehouseInventory = inventoryData.filter(
 		(list) => list.warehouseID === id
 	);
-  console.log(warehouseInventory[0])
 	res.status(200).json({
 		status: "success",
 		warehouseInventory,
