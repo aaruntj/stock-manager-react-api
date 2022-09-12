@@ -57,20 +57,18 @@ const addInventoryItem = (req, res) => {
 
 //------- Update Item ----------
 const updateInventoryItem = (req, res) => {
-	let inventoryData = inventoryModel.fetchInventoryData();
-	objIndex = inventoryData.findIndex(
-		(inventoryItem) => inventoryItem.id === req.body.id
-	);
-	let oldInventoryData = inventoryData;
-
-	oldInventoryData[objIndex].warehouseID = req.body.warehouseID;
-	oldInventoryData[objIndex].warehouseName = req.body.warehouseName;
-	oldInventoryData[objIndex].itemName = req.body.itemName;
-	oldInventoryData[objIndex].description = req.body.description;
-	oldInventoryData[objIndex].category = req.body.category;
-	oldInventoryData[objIndex].status = req.body.status;
-	oldInventoryData[objIndex].quantity = req.body.quantity;
-
+  let inventoryData = inventoryModel.fetchInventoryData();
+  objIndex = inventoryData.findIndex(inventoryItem => inventoryItem.id === req.body.id)
+  let listOfWarehouses = warehouseModel.fetchWarehouseData();
+  let selectedWarehouse = listOfWarehouses.find(warehouse => warehouse.name === req.body.warehouseName)
+  let oldInventoryData = inventoryData;
+  oldInventoryData[objIndex].warehouseID = selectedWarehouse.id
+  oldInventoryData[objIndex].warehouseName = req.body.warehouseName
+  oldInventoryData[objIndex].itemName = req.body.itemName
+  oldInventoryData[objIndex].description = req.body.description
+  oldInventoryData[objIndex].category = req.body.category
+  oldInventoryData[objIndex].status = req.body.status
+  oldInventoryData[objIndex].quantity = req.body.quantity
 	inventoryModel.writeInventoryData(oldInventoryData);
 	res.sendStatus(200);
 };
