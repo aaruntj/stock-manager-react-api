@@ -26,6 +26,16 @@ const warehouseInventory = (req, res) => {
 	});
 };
 
+// ---------- Get single Warehouse Item --------
+const singleWarehouse = (req, res) => {
+	const id = req.params.id;
+	const warehouse = warehouseData.find((el) => el.id === id);
+
+	res.status(200).json({
+		status: "sucess",
+		warehouse,
+	});
+};
 // ---------- Delete Warehouse and ascociated inventory --------
 const deleteWarehouse = (req, res) => {
 	let warehouses = warehouseModel.fetchWarehouseData();
@@ -65,10 +75,17 @@ const fieldValidation = (req, res, next) => {
 	const validEmail = warehouseData.find((el) => el.contact.email === email);
 	const validPhone = warehouseData.find((el) => el.contact.phone === phone);
 
-	res.status(200).json({
-		status: "sucess",
-		mensagem: "Email and Phone Number validated!",
-	});
+	if (validEmail && validPhone) {
+		res.status(200).json({
+			status: "sucess",
+			mensagem: "Email and Phone Number validated!",
+		});
+	} else {
+		res.status(400).json({
+			status: "fail",
+			messagem: "Enter a valid email or phone number.",
+		});
+	}
 	next();
 };
 
@@ -76,30 +93,28 @@ const fieldValidation = (req, res, next) => {
 const editWareHouse = (req, res) => {
 	const id = req.params.id;
 	const newWarehouse = warehouseData.find((el) => el.id === id);
+	const newWarehouseBody = req.body;
+	const newWarehouseData = [...warehouseData, newWarehouseBody];
 
 	if (newWarehouse) {
-		let editedItem = {
-			id: req.body.id,
-			name: req.body.name,
-			address: req.body.address,
-			city: req.body.city,
-			country: req.body.country,
-			contact: {
-				name: req.body.contact.name,
-				position: req.body.contact.position,
-				phone: req.body.contact.phone,
-				email: req.body.contact.email,
-			},
-		};
-		return editedItem;
+		warehouseModel.writeWarehouseData(newWarehouseData);
+		res.status(200).send({
+			newWarehouseData,
+		});
+	} else {
+		res.status(500).json({
+			status: "fail",
+			message: "Something went wrong",
+		});
 	}
-	res.status(200).json({
-		editedItem,
-	});
 };
 
 module.exports = {
 	warehouseList,
 	warehouseInventory,
 	deleteWarehouse,
+	checkFields,
+	fieldValidation,
+	editWareHouse,
+	singleWarehouse,
 };

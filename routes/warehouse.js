@@ -7,9 +7,17 @@ const warehouseController = require("../controllers/warehouseControllers");
 //example return warehouselist
 router.route("/").get(warehouseController.warehouseList);
 
-router.route("/:id").delete(warehouseController.deleteWarehouse);
+router
+	.route("/:id")
+	.get(warehouseController.singleWarehouse)
+	.put(
+		warehouseController.checkFields,
+		warehouseController.fieldValidation,
+		warehouseController.editWareHouse
+	)
+	.delete(warehouseController.deleteWarehouse);
 
-//Warehouse detail endpoint
+// Warehouse detail endpoint
 router.route("/:id/inventory").get(warehouseController.warehouseInventory);
 
 module.exports = router;
