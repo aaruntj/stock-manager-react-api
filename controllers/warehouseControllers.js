@@ -9,6 +9,7 @@ let warehouseData = warehouseModel.fetchWarehouseData();
 let inventoryData = inventoryModel.fetchInventoryData();
 //------- Get all Warehouses List ----------
 const warehouseList = (_req, res) => {
+  warehouseData = warehouseModel.fetchWarehouseData();
 	res.status(200).json({
 		status: "success",
 		results: warehouseData.length,
@@ -30,9 +31,12 @@ const warehouseSingle = (req, res) => {
 // ---------- Get all inventory items for a Warehouse --------
 const warehouseInventory = (req, res) => {
 	const id = req.params.id;
+  let inventoryData = inventoryModel.fetchInventoryData();
+  warehouseData = warehouseModel.fetchWarehouseData();
 	const warehouseInventory = inventoryData.filter(
 		(list) => list.warehouseID === id
 	);
+  console.log(warehouseInventory[0])
 	res.status(200).json({
 		status: "success",
 		warehouseInventory,
