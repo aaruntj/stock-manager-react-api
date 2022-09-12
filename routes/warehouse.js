@@ -8,6 +8,7 @@ const warehouseController = require("../controllers/warehouseControllers");
 router.route("/").get(warehouseController.warehouseList);
 
 router
+
 	.route("/:id")
 	.get(warehouseController.singleWarehouse)
 	.put(

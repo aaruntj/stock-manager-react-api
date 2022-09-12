@@ -5,7 +5,6 @@ const { v4: uuidv4 } = require("uuid");
 //------- Get all Inventory List ----------
 const inventoryList = (_req, res) => {
 	let inventoryData = inventoryModel.fetchInventoryData();
-
 	res.status(200).json({
 		status: "fail",
 		results: inventoryData.length,
@@ -16,7 +15,6 @@ const inventoryList = (_req, res) => {
 // ---------- Get single Inventory Item --------
 const inventoryItem = (req, res) => {
 	let inventoryData = inventoryModel.fetchInventoryData();
-
 	const id = req.params.id;
 	const inventoryItem = inventoryData.find((item) => item.id === id);
 
@@ -60,7 +58,6 @@ const addInventoryItem = (req, res) => {
 //------- Update Item ----------
 const updateInventoryItem = (req, res) => {
 	let inventoryData = inventoryModel.fetchInventoryData();
-
 	objIndex = inventoryData.findIndex(
 		(inventoryItem) => inventoryItem.id === req.body.id
 	);
