@@ -10,6 +10,19 @@ router
   .get(warehouseController.warehouseList);
 
 router
+<<<<<<< HEAD
+	.route("/:id")
+	.get(warehouseController.singleWarehouse)
+	.put(
+		warehouseController.checkFields,
+		warehouseController.fieldValidation,
+		warehouseController.editWareHouse
+	)
+	.delete(warehouseController.deleteWarehouse);
+
+// Warehouse detail endpoint
+router.route("/:id/inventory").get(warehouseController.warehouseInventory);
+=======
   .route("/:id")
   .get(warehouseController.warehouseSingle)
   .delete(warehouseController.deleteWarehouse);
@@ -18,5 +31,6 @@ router
 router
   .route("/:id/inventory")
   .get(warehouseController.warehouseInventory);
+>>>>>>> develop
 
 module.exports = router;
