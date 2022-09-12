@@ -36,6 +36,7 @@ const deleteInvetoryItem = (req, res) => {
 
 //------- Add Item ----------
 const addInventoryItem = (req, res) => {
+  console.log("adding inventory item")
   let inventory = inventoryModel.fetchInventoryData();
   let listOfWarehouses = warehouseModel.fetchWarehouseData();
   let selectedWarehouse = listOfWarehouses.find(warehouse => warehouse.name === req.body.warehouseName)
@@ -57,16 +58,19 @@ const addInventoryItem = (req, res) => {
 //------- Update Item ----------
 const updateInventoryItem = (req, res) => {
   objIndex = inventoryData.findIndex(inventoryItem => inventoryItem.id === req.body.id)
+  let listOfWarehouses = warehouseModel.fetchWarehouseData();
+  let selectedWarehouse = listOfWarehouses.find(warehouse => warehouse.name === req.body.warehouseName)
   let oldInventoryData = inventoryData;
-
-  oldInventoryData[objIndex].warehouseID = req.body.warehouseID
+  console.log("updating!")
+  console.log(req.body)
+  oldInventoryData[objIndex].warehouseID = selectedWarehouse.id
   oldInventoryData[objIndex].warehouseName = req.body.warehouseName
   oldInventoryData[objIndex].itemName = req.body.itemName
   oldInventoryData[objIndex].description = req.body.description
   oldInventoryData[objIndex].category = req.body.category
   oldInventoryData[objIndex].status = req.body.status
   oldInventoryData[objIndex].quantity = req.body.quantity
-
+  console.log(oldInventoryData[objIndex])
   inventoryModel.writeInventoryData(oldInventoryData)
   res.sendStatus(200)
 
