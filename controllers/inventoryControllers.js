@@ -1,12 +1,11 @@
 const inventoryModel = require("../models/inventoryModel");
 const warehouseModel = require("../models/warehouseModel");
-const { v4: uuidv4 } = require('uuid');
-
-//--------- Inventory Data ----------
-let inventoryData = inventoryModel.fetchInventoryData();
+const { v4: uuidv4 } = require("uuid");
 
 //------- Get all Inventory List ----------
 const inventoryList = (_req, res) => {
+	let inventoryData = inventoryModel.fetchInventoryData();
+
 	res.status(200).json({
 		status: "fail",
 		results: inventoryData.length,
@@ -16,6 +15,8 @@ const inventoryList = (_req, res) => {
 
 // ---------- Get single Inventory Item --------
 const inventoryItem = (req, res) => {
+	let inventoryData = inventoryModel.fetchInventoryData();
+
 	const id = req.params.id;
 	const inventoryItem = inventoryData.find((item) => item.id === id);
 
@@ -58,6 +59,8 @@ const addInventoryItem = (req, res) => {
 
 //------- Update Item ----------
 const updateInventoryItem = (req, res) => {
+	let inventoryData = inventoryModel.fetchInventoryData();
+
 	objIndex = inventoryData.findIndex(
 		(inventoryItem) => inventoryItem.id === req.body.id
 	);
@@ -71,19 +74,14 @@ const updateInventoryItem = (req, res) => {
 	oldInventoryData[objIndex].status = req.body.status;
 	oldInventoryData[objIndex].quantity = req.body.quantity;
 
-
-  inventoryModel.writeInventoryData(oldInventoryData)
-  res.sendStatus(200)
-
-}
-
-
+	inventoryModel.writeInventoryData(oldInventoryData);
+	res.sendStatus(200);
+};
 
 module.exports = {
-
-  inventoryList,
-  deleteInvetoryItem,
-  inventoryItem,
-  addInventoryItem,
-  updateInventoryItem
+	inventoryList,
+	deleteInvetoryItem,
+	inventoryItem,
+	addInventoryItem,
+	updateInventoryItem,
 };
