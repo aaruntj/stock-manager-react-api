@@ -5,10 +5,12 @@ const warehouseController = require("../controllers/warehouseControllers");
 //Warehouse list endpoint
 
 //example return warehouselist
-router.route("/").get(warehouseController.warehouseList);
+router
+  .route("/")
+  .get(warehouseController.warehouseList)
+  .post(warehouseController.addWarehouse)
 
 router
-
 	.route("/:id")
 	.get(warehouseController.singleWarehouse)
 	.put(
