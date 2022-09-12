@@ -5,6 +5,8 @@ const { v4: uuidv4 } = require("uuid");
 //--------- Warehouse Data ----------
 let warehouseData = warehouseModel.fetchWarehouseData();
 
+//--------- Warehouse Data ----------
+let inventoryData = inventoryModel.fetchInventoryData();
 //------- Get all Warehouses List ----------
 const warehouseList = (_req, res) => {
   res.status(200).json({
