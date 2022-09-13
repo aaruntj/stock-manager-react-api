@@ -148,9 +148,9 @@ const fieldValidation = (req, res, next) => {
 //------- Put Request Warehouse ----------
 const editWareHouse = (req, res) => {
 	const id = req.params.id;
-	const newWarehouse = warehouseData.find((el) => el.id === id);
+	const newWarehouse = warehouseData.filter((el) => el.id !== id);
 	const newWarehouseBody = req.body;
-	const newWarehouseData = [...warehouseData, newWarehouseBody];
+	const newWarehouseData = [...newWarehouse, newWarehouseBody];
 
 	if (newWarehouse) {
 		warehouseModel.writeWarehouseData(newWarehouseData);
