@@ -18,9 +18,7 @@ app.use("/inventory", inventoryRoute);
 //Warehouse route
 app.use("/", warehouseRoute);
 
-
-
 app.listen(PORT, () => {
-	console.log("Running on " + PORT);
-	console.log("URL: " + BACKEND_URL);
+  console.log("Running on " + PORT);
+  console.log("URL: " + BACKEND_URL);
 });
