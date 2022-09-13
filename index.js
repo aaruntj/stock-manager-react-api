@@ -14,9 +14,11 @@ app.use(express.json());
 
 //Inventory route
 app.use("/inventory", inventoryRoute);
-app.use("/warehouse", warehouseRoute);
 
-app.listen(8080, () => {
-  console.log("Running on: " + PORT);
+//Warehouse route
+app.use("/", warehouseRoute);
+
+app.listen(PORT, () => {
+  console.log("Running on " + PORT);
   console.log("URL: " + BACKEND_URL);
 });
